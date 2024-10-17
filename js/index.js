@@ -5,6 +5,7 @@ let resolveBoxDom = document.querySelector('.resolve-status') // 上传成功区
 let deleteBtnDom =  document.querySelector('.delete-btn') // 删除按钮
 let imgDom = document.querySelector('.o-img') // 上传图片展示区域
 let submitBtnDom = document.querySelector('.submit-btn') // 提交按钮
+let fileNameDom = document.querySelector('.resolve-status .name') // 文件名展示区域
 
 
 // 上传的文件Blob对象
@@ -61,6 +62,8 @@ fileInputDom.addEventListener('change', function() {
     reader.onload = function() {
         toggleVisibility()
         imgDom.src = checkImage(targetFile) ?  reader.result : defaultImgUrl
+        console.log(fileNameDom,targetFile)
+        fileNameDom.innerText = targetFile.name
     }
 })
 
