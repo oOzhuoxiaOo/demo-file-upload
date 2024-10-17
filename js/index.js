@@ -54,6 +54,9 @@ uploadBtnDom.addEventListener('click', function() {
 fileInputDom.addEventListener('change', function() {
     if(!checkFile(this.files[0])) return
     targetFile = this.files[0]
+    changeHandler()
+})
+function changeHandler(){
     // 创建一个文件读取对象
     let reader = new FileReader()
     // 读取文件
@@ -62,10 +65,9 @@ fileInputDom.addEventListener('change', function() {
     reader.onload = function() {
         toggleVisibility()
         imgDom.src = checkImage(targetFile) ?  reader.result : defaultImgUrl
-        console.log(fileNameDom,targetFile)
         fileNameDom.innerText = targetFile.name
     }
-})
+}
 
 
 // 删除按钮点击事件
@@ -91,4 +93,38 @@ submitBtnDom.addEventListener('click', function() {
         // 异常错误处理 （网络、异常）
         console.log(err)
     })
+})
+
+
+// 拖拽上传
+let dropCount = 0 // 
+let dropArea = document.querySelector('.drop-area')
+
+dropArea.addEventListener('dragenter', function(e) {
+    console.log('dragenter')
+    console.log('e',e)
+    e.stopPropagation()
+    e.preventDefault()
+    dropCount++
+    dropArea.classList.add('active')
+})
+dropArea.addEventListener('dragover', function(e) {
+    console.log('dragover')
+    e.preventDefault()
+})
+dropArea.addEventListener('dragleave', function(e) {
+    console.log('dragleave')
+    e.preventDefault()
+    dropCount--
+    if(dropCount === 0) dropArea.classList.remove('active')
+    
+})
+// 拖拽释放事件
+dropArea.addEventListener('drop', function(e) {
+    e.preventDefault()
+    dropCount = 0
+    dropArea.classList.remove('active')
+    if(!checkFile(e.dataTransfer.files[0])) return
+    targetFile = e.dataTransfer.files[0]
+    changeHandler()
 })

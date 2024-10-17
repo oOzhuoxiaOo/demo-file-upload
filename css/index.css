@@ -111,12 +111,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #fff;
-    border: solid 1px #333333;
-    background-color: #93a3ff;
+    color: #0617d7;
+    border: solid #0617d7 2px;
     margin-top: 20px;
     transition: all 0.3s;
     &:hover {
+        color: #fff;
         background-color: #0617d7;
     }
 }
@@ -124,4 +124,8 @@ body {
 
 .hidden {
     display: none !important;
+}
+
+.active {
+    background-color: #fe9393;
 }
