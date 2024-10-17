@@ -87,7 +87,6 @@ submitBtnDom.addEventListener('click', function() {
     }).then(res => res.json())
     .then(res => {
         // 上传后回调
-        console.log(res)
     })
     .catch(err => {
         // 异常错误处理 （网络、异常）
@@ -101,19 +100,15 @@ let dropCount = 0 //
 let dropArea = document.querySelector('.drop-area')
 
 dropArea.addEventListener('dragenter', function(e) {
-    console.log('dragenter')
-    console.log('e',e)
     e.stopPropagation()
     e.preventDefault()
     dropCount++
     dropArea.classList.add('active')
 })
 dropArea.addEventListener('dragover', function(e) {
-    console.log('dragover')
     e.preventDefault()
 })
 dropArea.addEventListener('dragleave', function(e) {
-    console.log('dragleave')
     e.preventDefault()
     dropCount--
     if(dropCount === 0) dropArea.classList.remove('active')
